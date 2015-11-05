@@ -1,0 +1,60 @@
+apply plugin: "java"
+apply plugin: "scala"
+apply plugin: 'com.github.johnrengelman.shadow'
+
+// Configure Java
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+// Configure Scala
+dependencies {
+    compile libs.scala
+    runtime libs.scalaCompiler // For the scalaConsole task
+}
+
+tasks.withType(ScalaCompile) { compileScala.scalaCompileOptions.useAnt = false }
+
+// Create a jar with the source code
+task sourcesJar(type: Jar, dependsOn: classes) {
+    from sourceSets.main.allSource
+    classifier "sources"
+    extension "jar"
+}
+
+// Create a jar with the scaladoc
+task scaladocJar(type: Jar, dependsOn: scaladoc) {
+    from scaladoc.destinationDir
+    classifier "scaladoc"
+    extension "jar"
+}
+
+// Add configurations for extra artifacts
+configurations.create("sources")
+configurations.create("scaladoc")
+configurations.archives {
+    extendsFrom configurations.sources
+    extendsFrom configurations.scaladoc
+}
+
+// Add extra artifacts to be created during build
+artifacts {
+    sources(sourcesJar) {
+        // Weird Gradle quirk where type will be used for the extension, but only for sources
+        type "jar"
+    }
+    scaladoc(scaladocJar) {
+        type "scaladoc"
+    }
+}
+scaladoc.doFirst { println "" }
+
+// Create a shaded jar with all dependencies
+shadowJar {
+    exclude 'META-INF/*.RSA', 'META-INF/*.SF','META-INF/*.DSA'
+}
+
+// Add Provided Dependency Support
+configurations { providedCompile }
+sourceSets.main.compileClasspath += configurations.providedCompile
+sourceSets.test.compileClasspath += configurations.providedCompile
+sourceSets.test.runtimeClasspath += configurations.providedCompile
