@@ -2,7 +2,7 @@ branches:
   only:
   - master
 
-language: java
+language: scala
 
 scala:
   - 2.11.7
@@ -19,6 +19,11 @@ cache:
   directories:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
+
+before_install:
+  - pip install --user codecov
+after_success:
+  - codecov
 
 script:
   - gradle build -PscalaVersion=$TRAVIS_SCALA_VERSION
