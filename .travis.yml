@@ -2,7 +2,7 @@ branches:
   only:
   - master
 
-language: scala
+language: java
 
 scala:
   - 2.11.7
@@ -21,4 +21,4 @@ cache:
     - $HOME/.gradle/wrapper/
 
 script:
-  - ./gradlew build -PscalaVersion=$TRAVIS_SCALA_VERSION
+  - gradle build -PscalaVersion=$TRAVIS_SCALA_VERSION
