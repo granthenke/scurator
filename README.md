@@ -2,6 +2,8 @@ SCurator
 ========
 An asynchronous Scala wrapper around the Apache Curator Framework.
 
+[![Build Status](https://travis-ci.org/granthenke/scurator.svg)](https://travis-ci.org/granthenke/scurator)
+
 Getting Started:
 ----------------
 ```scala
