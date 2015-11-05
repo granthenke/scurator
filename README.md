@@ -4,7 +4,7 @@ An asynchronous Scala wrapper around the Apache Curator Framework.
 
 [![Build Status](https://travis-ci.org/granthenke/scurator.svg)](https://travis-ci.org/granthenke/scurator)
 [![codecov.io](http://codecov.io/github/granthenke/scurator/coverage.svg?branch=master)](http://codecov.io/github/granthenke/scurator?branch=master)
-
+[![Code Climate](https://codeclimate.com/github/granthenke/scurator/badges/gpa.svg)](https://codeclimate.com/github/granthenke/scurator)
 
 Getting Started:
 ----------------

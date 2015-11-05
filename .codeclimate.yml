@@ -1,0 +1,3 @@
+engines:
+  scalastyle:
+    enabled: true
