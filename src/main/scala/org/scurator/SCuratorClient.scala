@@ -141,8 +141,9 @@ class SCuratorClient(val underlying: CuratorFramework) {
           val w = Some(new Watcher())
           (builder.usingWatcher(w.get), w)
       }
-      val stat = blocking { watchOpt.forPath(request.path) }
-      ExistsResponse(request.path, Option(stat).isDefined, Option(stat), watcher)
+      val result = blocking { watchOpt.forPath(request.path) }
+      val statOpt = Option(result)
+      ExistsResponse(request.path, statOpt.isDefined, statOpt, watcher)
     }
   }
 
@@ -270,11 +271,9 @@ class SCuratorClient(val underlying: CuratorFramework) {
     */
   def stat(request: StatRequest)(implicit executor: ExecutionContext): Future[StatResponse] = {
     exists(ExistsRequest(request.path)).map { response =>
-      if (response.stat.isDefined) {
-        StatResponse(request.path, stat = response.stat.get)
-      } else {
-        throw new NoNodeException(request.path)
-      }
+      response.stat.map { s =>
+        StatResponse(request.path, stat = s)
+      }.getOrElse(throw new NoNodeException(request.path))
     }
   }
 
@@ -286,11 +285,9 @@ class SCuratorClient(val underlying: CuratorFramework) {
     */
   def watch(request: WatchRequest)(implicit executor: ExecutionContext): Future[WatchResponse] = {
     exists(ExistsRequest(request.path, watch = true)).map { response =>
-      if (response.watch.isDefined) {
-        WatchResponse(request.path, watch = response.watch.get)
-      } else {
-        throw new NoNodeException(request.path)
-      }
+      response.watch.map { w =>
+        WatchResponse(request.path, watch = w)
+      }.getOrElse(throw new NoNodeException(request.path))
     }
   }
 
