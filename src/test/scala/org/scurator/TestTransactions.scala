@@ -1,11 +1,13 @@
 package org.scurator
 
 import org.apache.zookeeper.KeeperException.BadVersionException
+import org.apache.zookeeper.ZooDefs
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 import org.scurator.components._
 
 import scala.concurrent.ExecutionContext.Implicits.global
+import scala.collection.JavaConverters._
 
 /**
   *
@@ -48,6 +50,7 @@ class TestTransactions extends BaseSCuratorTest with SCuratorTestClient {
     val fooData: Array[Byte] = "foo".getBytes
     val barPath: String = "/bar"
     val bazPath: String = "/baz"
+    val bazData: Array[Byte] = "baz".getBytes
 
     // Set base path and data
     client.create(CreateRequest(path = fooPath)).futureValue
@@ -56,10 +59,11 @@ class TestTransactions extends BaseSCuratorTest with SCuratorTestClient {
     // Check, SetData, Delete and Create
     val ops = Seq(
       CheckRequest(path = fooPath),
-      SetDataRequest(path = fooPath, data = Some(fooData)),
+      SetDataRequest(path = fooPath, data = Some(fooData), version = Some(0)),
       CheckRequest(path = barPath),
-      DeleteRequest(path = barPath),
-      CreateRequest(path = bazPath)
+      DeleteRequest(path = barPath, version = Some(0)),
+      CreateRequest(path = bazPath, data = Some(bazData), acl = Some(ZooDefs.Ids.OPEN_ACL_UNSAFE.asScala)),
+      SetDataRequest(path = bazPath, data = None) // Create and set in same transaction
     )
     val trans = client.transaction(ops)
 
@@ -88,9 +92,15 @@ class TestTransactions extends BaseSCuratorTest with SCuratorTestClient {
         result should not be 'exists
       }
 
-      // The baz path should not exist
-      whenReady(client.exists(ExistsRequest(path = bazPath))) { result =>
-        result shouldBe 'exists
+      // The baz data should be unset
+      whenReady(client.getData(GetDataRequest(path = bazPath))) { result =>
+        result.data shouldBe None
+      }
+
+      // Verify the correct baz ACL is returned
+      whenReady(client.getAcl(GetACLRequest(path = bazPath))) { result =>
+        result.acl.size shouldBe 1
+        result.acl.head shouldBe ZooDefs.Ids.OPEN_ACL_UNSAFE.asScala.head
       }
     }
   }

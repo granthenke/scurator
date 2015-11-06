@@ -256,7 +256,7 @@ class SCuratorClient(val underlying: CuratorFramework) {
         case Some(v) => compressedOpt.withVersion(v)
       }
       val stat = request.data match {
-        case None => blocking { versionOpt.forPath(request.path) }
+        case None => blocking { versionOpt.forPath(request.path, null) } // scalastyle:ignore
         case Some(d) => blocking { versionOpt.forPath(request.path, d) }
       }
       SetDataResponse(request.path, stat)

@@ -56,7 +56,7 @@ object Transactions {
       case Some(a) => modeOpt.withACL(a.asJava)
     }
     request.data match {
-      case None => aclOpt.forPath(request.path)
+      case None => aclOpt.forPath(request.path, null) // scalastyle:ignore
       case Some(d) => aclOpt.forPath(request.path, d)
     }
   }
@@ -86,7 +86,7 @@ object Transactions {
       case Some(v) => builder.withVersion(v)
     }
     request.data match {
-      case None => versionOpt.forPath(request.path)
+      case None => versionOpt.forPath(request.path, null) // scalastyle:ignore
       case Some(d) => versionOpt.forPath(request.path, d)
     }
   }
