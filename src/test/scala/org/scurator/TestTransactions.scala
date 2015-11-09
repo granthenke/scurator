@@ -129,4 +129,37 @@ class TestTransactions extends BaseSCuratorTest with SCuratorTestClient {
       }
     }
   }
+  it should "throw an exception if compression is used" in {
+    val fooPath: String = "/foo"
+    val fooData: Array[Byte] = "foo".getBytes
+
+    val trans = client.transaction(Seq(
+      CreateRequest(path = fooPath, data = Some(fooData), compressed = true)
+    ))
+
+    // The transaction should fail with the expected exception
+    whenReady(trans.failed) { result =>
+      result shouldBe a[UnsupportedOperationException]
+
+      // The create request should not have executed
+      whenReady(client.exists(ExistsRequest(path = fooPath))) { result =>
+        result should not be 'exists
+      }
+    }
+
+    val trans2 = client.transaction(Seq(
+      CreateRequest(path = fooPath),
+      SetDataRequest(path = fooPath, data = Some(fooData), compressed = true)
+    ))
+
+    // The transaction should fail with the expected exception
+    whenReady(trans2.failed) { result =>
+      result shouldBe a[UnsupportedOperationException]
+
+      // The create request should not have executed
+      whenReady(client.exists(ExistsRequest(path = fooPath))) { result =>
+        result should not be 'exists
+      }
+    }
+  }
 }

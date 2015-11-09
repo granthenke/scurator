@@ -50,6 +50,7 @@ object Transactions {
     //   case false => builder
     //   case true => builder.compressed
     // }
+    if (request.compressed) throw new UnsupportedOperationException("compression is not supported in transactions. See Jira CURATOR-278")
     val modeOpt = builder.withMode(request.mode)
     val aclOpt = request.acl match {
       case None => modeOpt
@@ -81,6 +82,7 @@ object Transactions {
     //   case false => builder
     //   case true => builder.compressed()
     // }
+    if (request.compressed) throw new UnsupportedOperationException("compression is not supported in transactions. See Jira CURATOR-278")
     val versionOpt = request.version match {
       case None => builder
       case Some(v) => builder.withVersion(v)
