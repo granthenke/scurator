@@ -15,7 +15,6 @@ repositories {
 dependencies {
     compile([
         libs.curatorRecipes,
-        libs.scalaLogging,
         libs.slf4jApi,
     ])
 

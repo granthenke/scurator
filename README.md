@@ -71,5 +71,4 @@ Notable Libraries/Frameworks Used
 - [Logback](https://github.com/qos-ch/logback)
 - [Scalariform](https://github.com/daniel-trinh/scalariform)
 - [ScalaTest](https://github.com/scalatest/scalatest)
-- [Scala-Logging](https://github.com/typesafehub/scala-logging)
 - [Scoverage](https://github.com/scoverage/gradle-scoverage)

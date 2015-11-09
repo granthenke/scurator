@@ -3,16 +3,18 @@ package org.scurator
 import java.io.IOException
 import java.net.BindException
 
-import com.typesafe.scalalogging.LazyLogging
 import org.apache.curator.test.TestingServer
 import org.scalatest.concurrent.ScalaFutures
 import org.scalatest.time.{Millis, Seconds, Span}
 import org.scalatest.{BeforeAndAfterEach, FlatSpec, Matchers}
+import org.slf4j.{LoggerFactory, Logger}
 
 /**
   *
   */
-trait BaseSCuratorTest extends FlatSpec with Matchers with ScalaFutures with BeforeAndAfterEach with LazyLogging {
+trait BaseSCuratorTest extends FlatSpec with Matchers with ScalaFutures with BeforeAndAfterEach {
+  protected val logger: Logger = LoggerFactory.getLogger(getClass.getName)
+
   protected var serverOpt: Option[TestingServer] = None
 
   private val timeoutSecs: Int = 2

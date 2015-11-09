@@ -47,7 +47,7 @@ publishing {
         standard(MavenPublication) {
             // Maven info
             groupId = project.group
-            artifactId = project.name
+            artifactId = "${project.name}_${versions.scalaBase}"
             version = project.version
 
             // Artifacts to publish
@@ -106,7 +106,7 @@ bintray {
     publish = false //If version should be auto published after an upload
 
     pkg {
-        repo = 'github'
+        repo = 'maven'
         name = project.name
         desc = project.description
         websiteUrl = project.url
