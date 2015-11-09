@@ -8,6 +8,17 @@ An asynchronous Scala wrapper around the Apache Curator Framework.
 
 Getting Started:
 ----------------
+
+```
+Maven Repository URL: http://dl.bintray.com/granthenke/maven
+groupId: org.scurator
+artifactId:  scurator_2.11
+version: 0.1.0
+```
+
+*Note*: Use artifactId: `scurator_2.10` if you want to use with Scala 2.10
+
+
 ```scala
 // Add needed imports
 import org.apache.curator.framework.CuratorFrameworkFactory
@@ -66,6 +77,7 @@ Functional Differences from Apache Curator:
 
 Notable Libraries/Frameworks Used
 ---------------------------------
+- [Bintray](https://github.com/bintray/gradle-bintray-plugin)
 - [Curator](https://github.com/apache/curator)
 - [Gradle](https://github.com/gradle/gradle)
 - [Logback](https://github.com/qos-ch/logback)
