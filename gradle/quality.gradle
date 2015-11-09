@@ -1,0 +1,30 @@
+apply from: "$rootDir/gradle/scalariform.gradle"
+apply plugin: 'scalaStyle'
+apply plugin: 'scoverage'
+apply plugin: 'com.github.ben-manes.versions'
+
+scalaStyle {
+    configLocation = "$rootDir/gradle/scalastyle_config.xml"
+    includeTestSourceDirectory = true
+    failOnViolation = true
+    failOnWarning = false
+    source = "src/main/scala"
+    testSource = "src/test/scala"
+}
+scalaStyle.dependsOn('compileScala', 'compileTestScala')
+check.dependsOn('scalaStyle')
+test.shouldRunAfter('scalaStyle')
+
+checkScoverage {
+    minimumRate = 0.90
+}
+check.dependsOn('checkScoverage')
+checkScoverage.shouldRunAfter('test')
+
+task wrapper(type: Wrapper) {
+    gradleVersion = versions.gradle
+}
+
+dependencyUpdates {
+    revision="release"
+}

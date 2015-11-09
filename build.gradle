@@ -2,17 +2,14 @@ buildscript { apply from: file('gradle/buildscript.gradle'), to: buildscript }
 
 apply from: "$rootDir/gradle/dependencies.gradle"
 apply from: "$rootDir/gradle/artifacts.gradle"
-apply from: "$rootDir/gradle/scalariform.gradle"
+apply from: "$rootDir/gradle/quality.gradle"
 
 apply plugin: "idea"
 apply plugin: "eclipse"
-apply plugin: 'com.github.ben-manes.versions'
-apply plugin: 'scalaStyle'
-apply plugin: 'scoverage'
 
 repositories {
+    jcenter()
     mavenCentral()
-    mavenLocal()
 }
 
 dependencies {
@@ -39,36 +36,14 @@ configurations {
     all*.exclude group: 'log4j', module: 'log4j'
 }
 
+dependencyUpdates {
+    revision="release"
+}
+
 test {
     maxParallelForks = Runtime.runtime.availableProcessors()
     testLogging {
         events "passed", "skipped", "failed"
         exceptionFormat = 'full'
     }
-}
-
-dependencyUpdates {
-    revision="release"
-}
-
-scalaStyle {
-    configLocation = "$rootDir/gradle/scalastyle_config.xml"
-    includeTestSourceDirectory = true
-    failOnViolation = true
-    failOnWarning = false
-    source = "src/main/scala"
-    testSource = "src/test/scala"
-}
-scalaStyle.dependsOn('compileScala', 'compileTestScala')
-check.dependsOn('scalaStyle')
-test.shouldRunAfter('scalaStyle')
-
-checkScoverage {
-    minimumRate = 0.90
-}
-check.dependsOn('checkScoverage')
-checkScoverage.shouldRunAfter('test')
-
-task wrapper(type: Wrapper) {
-    gradleVersion = versions.gradle
 }
