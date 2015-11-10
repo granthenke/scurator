@@ -11,7 +11,7 @@ versions += [
     scala: "2.11.7",
     scalaCheck: "1.12.4",
     scalaMeter: "0.6",
-    scalaTest: "2.2.4",
+    scalaTest: "2.2.5",
     scoverage: "1.1.1",
     slf4j: "1.7.12",
 ]

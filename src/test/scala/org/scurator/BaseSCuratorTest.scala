@@ -17,7 +17,7 @@ trait BaseSCuratorTest extends FlatSpec with Matchers with ScalaFutures with Bef
 
   protected var serverOpt: Option[TestingServer] = None
 
-  private val timeoutSecs: Int = 2
+  private val timeoutSecs: Int = 5
   private val intervalMillis: Int = 100
 
   implicit val defaultPatience = PatienceConfig(timeout = Span(timeoutSecs, Seconds), interval = Span(intervalMillis, Millis))
