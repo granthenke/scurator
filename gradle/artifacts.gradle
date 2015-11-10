@@ -22,10 +22,23 @@ sourceSets.main.compileClasspath += configurations.providedCompile
 sourceSets.test.compileClasspath += configurations.providedCompile
 sourceSets.test.runtimeClasspath += configurations.providedCompile
 
+// Create a test jar
+task testJar(type: Jar, dependsOn: testClasses) {
+    classifier = 'tests'
+    from sourceSets.test.output
+}
+
 // Create a jar with the source code
 task sourcesJar(type: Jar, dependsOn: classes) {
     from sourceSets.main.allSource
     classifier "sources"
+    extension "jar"
+}
+
+// Create a jar with the javadoc
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    from javadoc.destinationDir
+    classifier "javadoc"
     extension "jar"
 }
 
@@ -34,6 +47,13 @@ task scaladocJar(type: Jar, dependsOn: scaladoc) {
     from scaladoc.destinationDir
     classifier "scaladoc"
     extension "jar"
+}
+
+artifacts {
+    archives testJar
+    archives sourcesJar
+    archives javadocJar
+    archives scaladocJar
 }
 
 // Create a shaded jar with all dependencies
@@ -52,8 +72,10 @@ publishing {
 
             // Artifacts to publish
             from components.java
+            artifact testJar
             artifact sourcesJar
             artifact scaladocJar
+            artifact javadocJar
 
             // Pom additions
             pom.withXml {

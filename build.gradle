@@ -35,10 +35,6 @@ configurations {
     all*.exclude group: 'log4j', module: 'log4j'
 }
 
-dependencyUpdates {
-    revision="release"
-}
-
 test {
     maxParallelForks = Runtime.runtime.availableProcessors()
     testLogging {
