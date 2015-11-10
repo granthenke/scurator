@@ -13,7 +13,7 @@ Getting Started:
 Maven Repository URL: http://dl.bintray.com/granthenke/maven
 groupId: org.scurator
 artifactId:  scurator_2.11
-version: 0.1.0
+version: 0.1.1
 ```
 
 *Note*: Use artifactId: `scurator_2.10` if you want to use with Scala 2.10
