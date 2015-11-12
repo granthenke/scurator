@@ -2,22 +2,17 @@ SCurator
 ========
 An asynchronous Scala wrapper around the Apache Curator Framework.
 
-[![Build Status](https://travis-ci.org/granthenke/scurator.svg)](https://travis-ci.org/granthenke/scurator)
-[![codecov.io](http://codecov.io/github/granthenke/scurator/coverage.svg?branch=master)](http://codecov.io/github/granthenke/scurator?branch=master)
+[![Travis](https://img.shields.io/travis/granthenke/scurator.svg)](https://travis-ci.org/granthenke/scurator)
+[![Codecov](https://img.shields.io/codecov/c/github/granthenke/scurator.svg)](http://codecov.io/github/granthenke/scurator?branch=master)
 [![Code Climate](https://codeclimate.com/github/granthenke/scurator/badges/gpa.svg)](https://codeclimate.com/github/granthenke/scurator)
+[![Maven Central](https://img.shields.io/maven-central/v/org.scurator/scurator_2.11.svg)](https://maven-badges.herokuapp.com/maven-central/org.scurator/scurator_2.11)
+[![scaladoc](http://javadoc-badge.appspot.com/org.scurator/scurator_2.11.svg?label=scaladoc)](http://javadoc-badge.appspot.com/org.scurator/scurator_2.11)
+[![Twitter](https://img.shields.io/twitter/url/https/github.com/granthenke/scurator.svg?style=social)](https://twitter.com/intent/tweet?text=Wow:&url=%5Bobject%20Object%5D)
 
 Getting Started:
 ----------------
 
-```
-Maven Repository URL: http://dl.bintray.com/granthenke/maven
-groupId: org.scurator
-artifactId:  scurator_2.11
-version: 0.1.1
-```
-
-*Note*: Use artifactId: `scurator_2.10` if you want to use with Scala 2.10
-
+*Note*: Use artifactId `scurator_2.10` if you want to use with Scala 2.10
 
 ```scala
 // Add needed imports
