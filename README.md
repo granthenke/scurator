@@ -7,7 +7,6 @@ An asynchronous Scala wrapper around the Apache Curator Framework.
 [![Code Climate](https://codeclimate.com/github/granthenke/scurator/badges/gpa.svg)](https://codeclimate.com/github/granthenke/scurator)
 [![Maven Central](https://img.shields.io/maven-central/v/org.scurator/scurator_2.11.svg)](https://maven-badges.herokuapp.com/maven-central/org.scurator/scurator_2.11)
 [![scaladoc](http://javadoc-badge.appspot.com/org.scurator/scurator_2.11.svg?label=scaladoc)](http://javadoc-badge.appspot.com/org.scurator/scurator_2.11)
-[![Twitter](https://img.shields.io/twitter/url/https/github.com/granthenke/scurator.svg?style=social)](https://twitter.com/intent/tweet?text=Wow:&url=%5Bobject%20Object%5D)
 
 Getting Started:
 ----------------
