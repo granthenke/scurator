@@ -1,6 +1,8 @@
 buildscript { apply from: file('gradle/buildscript.gradle'), to: buildscript }
 
 apply from: "$rootDir/gradle/dependencies.gradle"
+apply from: "$rootDir/gradle/wrapper.gradle"
+apply from: "$rootDir/gradle/compile.gradle"
 apply from: "$rootDir/gradle/artifacts.gradle"
 apply from: "$rootDir/gradle/quality.gradle"
 
@@ -15,7 +17,12 @@ repositories {
 dependencies {
     compile([
         libs.curatorRecipes,
+        libs.scala,
         libs.slf4jApi,
+    ])
+
+    runtime ([
+        libs.scalaCompiler, // For the scalaConsole task
     ])
 
     testCompile([

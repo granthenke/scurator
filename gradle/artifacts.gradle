@@ -4,24 +4,6 @@ apply plugin: 'com.github.johnrengelman.shadow'
 apply plugin: 'maven-publish'
 apply plugin: 'com.jfrog.bintray'
 
-// Configure Java
-sourceCompatibility = 1.7
-targetCompatibility = 1.7
-
-// Configure Scala
-dependencies {
-    compile libs.scala
-    runtime libs.scalaCompiler // For the scalaConsole task
-}
-
-tasks.withType(ScalaCompile) { compileScala.scalaCompileOptions.useAnt = false }
-
-// Add Provided Dependency Support
-configurations { providedCompile }
-sourceSets.main.compileClasspath += configurations.providedCompile
-sourceSets.test.compileClasspath += configurations.providedCompile
-sourceSets.test.runtimeClasspath += configurations.providedCompile
-
 // Create a test jar
 task testJar(type: Jar, dependsOn: testClasses) {
     classifier = 'tests'
@@ -35,9 +17,9 @@ task sourcesJar(type: Jar, dependsOn: classes) {
     extension "jar"
 }
 
-// Create a jar with the javadoc
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    from javadoc.destinationDir
+// Create a javadoc jar, with scaladoc for maven central
+task javadocJar(type: Jar, dependsOn: scaladoc) {
+    from scaladoc.destinationDir
     classifier "javadoc"
     extension "jar"
 }
@@ -125,7 +107,7 @@ bintray {
     publications = ['standard']
 
     //dryRun = true //Whether to run this as dry-run, without deploying
-    publish = false //If version should be auto published after an upload
+    publish = true //If version should be auto published after an upload
 
     pkg {
         repo = 'maven'

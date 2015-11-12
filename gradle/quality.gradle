@@ -21,10 +21,6 @@ checkScoverage {
 check.dependsOn('checkScoverage')
 checkScoverage.shouldRunAfter('test')
 
-task wrapper(type: Wrapper) {
-    gradleVersion = versions.gradle
-}
-
 dependencyUpdates {
     revision="release"
 }

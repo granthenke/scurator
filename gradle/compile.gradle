@@ -1,0 +1,20 @@
+// Set compilation settings for the project
+// Note: Some options are commented out by default, but can be uncommented in useful situations
+allprojects {
+  // Scala configuration
+  tasks.withType(ScalaCompile) {
+    sourceCompatibility = javaSourceCompatibility
+    // enables incremental compilation via Zinc
+    scalaCompileOptions.useAnt = false
+    // enable compilation in a separate daemon process
+    scalaCompileOptions.fork = true
+    // make sure the encoding is utf-8 regardless of system default
+    scalaCompileOptions.encoding = 'utf-8'
+    // turn on compiler warnings for potential mistakes
+    scalaCompileOptions.additionalParameters = ["-Xlint", "-feature"]
+    configure(scalaCompileOptions.forkOptions) {
+      memoryMaximumSize = '1g'
+      jvmArgs = ['-XX:MaxPermSize=512m']
+    }
+  }
+}

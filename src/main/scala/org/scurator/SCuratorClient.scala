@@ -355,6 +355,7 @@ object SCuratorClient {
   }
 
   object Implicits {
+    import scala.language.implicitConversions
     implicit def curatorToSCurator(underlying: CuratorFramework): SCuratorClient = {
       new SCuratorClient(underlying)
     }
