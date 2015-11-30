@@ -6,9 +6,9 @@ import org.apache.zookeeper.data.ACL
 sealed trait Request
 
 /**
-  * OpRequest is used to compose a Transaction request.
-  * A Transaction request can be composed by OpRequest only.
-  */
+ * OpRequest is used to compose a Transaction request.
+ * A Transaction request can be composed by OpRequest only.
+ */
 sealed trait OpRequest extends Request
 
 case class CheckRequest(path: String, version: Option[Int] = None) extends OpRequest

@@ -13,8 +13,8 @@ import scala.concurrent.duration._
 import scala.concurrent.ExecutionContext.Implicits.global
 
 /**
-  *
-  */
+ *
+ */
 @RunWith(classOf[JUnitRunner])
 class TestLifeCyle extends BaseSCuratorTest {
 

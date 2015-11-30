@@ -17,6 +17,12 @@ task sourcesJar(type: Jar, dependsOn: classes) {
     extension "jar"
 }
 
+task testSourcesJar(type:Jar) {
+    from sourceSets.test.allSource
+    classifier "test-sources"
+    extension "jar"
+}
+
 // Create a javadoc jar, with scaladoc for maven central
 task javadocJar(type: Jar, dependsOn: scaladoc) {
     from scaladoc.destinationDir
@@ -34,6 +40,7 @@ task scaladocJar(type: Jar, dependsOn: scaladoc) {
 artifacts {
     archives testJar
     archives sourcesJar
+    archives testSourcesJar
     archives javadocJar
     archives scaladocJar
 }
@@ -117,8 +124,8 @@ bintray {
         issueTrackerUrl = project.issueTrackerUrl
         vcsUrl = project.scmUrl
         licenses = ['Apache-2.0']
-        labels = ['curator','zookeeper']
-        publicDownloadNumbers = true
+        labels = ['curator', 'scala', 'zookeeper']
+        publicDownloadNumbers = false
         version {
             name = project.version
             released  = new Date()

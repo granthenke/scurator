@@ -9,8 +9,8 @@ import scala.concurrent.ExecutionContext.Implicits.global
 import scala.collection.JavaConverters._
 
 /**
-  *
-  */
+ *
+ */
 @RunWith(classOf[JUnitRunner])
 class TestACL extends BaseSCuratorTest with SCuratorTestClient {
 

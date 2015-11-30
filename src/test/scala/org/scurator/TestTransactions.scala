@@ -10,8 +10,8 @@ import scala.concurrent.ExecutionContext.Implicits.global
 import scala.collection.JavaConverters._
 
 /**
-  *
-  */
+ *
+ */
 @RunWith(classOf[JUnitRunner])
 class TestTransactions extends BaseSCuratorTest with SCuratorTestClient {
 

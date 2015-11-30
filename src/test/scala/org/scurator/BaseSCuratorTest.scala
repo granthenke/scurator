@@ -10,8 +10,8 @@ import org.scalatest.{BeforeAndAfterEach, FlatSpec, Matchers}
 import org.slf4j.{LoggerFactory, Logger}
 
 /**
-  *
-  */
+ *
+ */
 trait BaseSCuratorTest extends FlatSpec with Matchers with ScalaFutures with BeforeAndAfterEach {
   protected val logger: Logger = LoggerFactory.getLogger(getClass.getName)
 

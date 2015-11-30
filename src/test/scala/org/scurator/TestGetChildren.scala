@@ -8,8 +8,8 @@ import org.scurator.components._
 import scala.concurrent.ExecutionContext.Implicits.global
 
 /**
-  *
-  */
+ *
+ */
 @RunWith(classOf[JUnitRunner])
 class TestGetChildren extends BaseSCuratorTest with SCuratorTestClient {
 

@@ -5,9 +5,9 @@ import org.apache.zookeeper.data.{ACL, Stat}
 sealed trait Response
 
 /**
-  * OpResponse is used to compose a Transaction response.
-  * A Transaction response can be composed by OpResult only.
-  */
+ * OpResponse is used to compose a Transaction response.
+ * A Transaction response can be composed by OpResult only.
+ */
 sealed trait OpResponse extends Response
 
 case class CreateResponse(path: String) extends OpResponse

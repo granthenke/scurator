@@ -6,8 +6,8 @@ import org.apache.curator.retry.RetryOneTime
 import org.scalatest.BeforeAndAfterEach
 
 /**
-  *
-  */
+ *
+ */
 trait SCuratorTestClient extends BeforeAndAfterEach { self: BaseSCuratorTest =>
 
   private var clientOpt: Option[SCuratorClient] = None
