@@ -36,7 +36,7 @@ This file is divided into 3 sections:
     <!-- Lines that are too long can be hard to read and horizontal scrolling is annoying.-->
     <check level="error" class="org.scalastyle.file.FileLineLengthChecker" enabled="true">
         <parameters>
-            <parameter name="maxLineLength">135</parameter>
+            <parameter name="maxLineLength">140</parameter>
             <parameter name="tabSize">2</parameter>
             <parameter name="ignoreImports">true</parameter>
         </parameters>

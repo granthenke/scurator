@@ -15,7 +15,8 @@ object Transactions {
           case delete: DeleteRequest => handleDeleteRequest(trans, delete).and()
           case setData: SetDataRequest => handleSetDataRequest(trans, setData).and()
         }
-    }.asInstanceOf[CuratorTransactionFinal] // We should always be able to based on org.apache.curator.framework.imps.CuratorTransactionImpl
+    }.asInstanceOf[CuratorTransactionFinal]
+    // We should always be able to based on org.apache.curator.framework.imps.CuratorTransactionImpl
   }
 
   def fromCuratorTransactionResults(results: Seq[CuratorTransactionResult]): TransactionResponse = {
@@ -93,5 +94,7 @@ object Transactions {
     }
   }
 
-  private def handleSetDataResponse(result: CuratorTransactionResult): SetDataResponse = new SetDataResponse(result.getForPath, result.getResultStat)
+  private def handleSetDataResponse(result: CuratorTransactionResult): SetDataResponse = {
+    new SetDataResponse(result.getForPath, result.getResultStat)
+  }
 }

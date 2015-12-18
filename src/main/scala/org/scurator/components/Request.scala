@@ -18,7 +18,8 @@ case class CreateRequest(path: String, data: Option[Array[Byte]] = None, acl: Op
 
 case class DeleteRequest(path: String, version: Option[Int] = None) extends OpRequest
 
-case class SetDataRequest(path: String, data: Option[Array[Byte]], version: Option[Int] = None, compressed: Boolean = false) extends OpRequest
+case class SetDataRequest(path: String, data: Option[Array[Byte]], version: Option[Int] = None, compressed: Boolean = false)
+  extends OpRequest
 
 case class TransactionRequest(ops: Seq[OpRequest]) extends Request
 
