@@ -10,5 +10,5 @@ sourceSets.main.compileClasspath += configurations.providedCompile
 sourceSets.test.compileClasspath += configurations.providedCompile
 
 plugins.withType(IdeaPlugin) {
-  idea.module.scopes.PROVIDED.plus = [ configurations.provided ]
+  idea.module.scopes.PROVIDED.plus = [ configurations.providedCompile ]
 }

@@ -14,7 +14,7 @@ sealed trait OpRequest extends Request
 case class CheckRequest(path: String, version: Option[Int] = None) extends OpRequest
 
 case class CreateRequest(path: String, data: Option[Array[Byte]] = None, acl: Option[Seq[ACL]] = None,
-  mode: CreateMode = CreateMode.PERSISTENT, compressed: Boolean = false) extends OpRequest
+                         mode: CreateMode = CreateMode.PERSISTENT, compressed: Boolean = false) extends OpRequest
 
 case class DeleteRequest(path: String, version: Option[Int] = None) extends OpRequest
 

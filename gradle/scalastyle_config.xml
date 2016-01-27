@@ -45,14 +45,6 @@ This file is divided into 3 sections:
     <!-- Tabs or spaces. Pick one. -->
     <check level="error" class="org.scalastyle.file.FileTabChecker" enabled="true" />
 
-    <!-- Code that is not indented consistently can be hard to read. -->
-    <check level="error" class="org.scalastyle.file.IndentationChecker" enabled="true">
-        <parameters>
-            <parameter name="tabSize">2</parameter>
-            <parameter name="methodParamIndentSize">2</parameter>
-        </parameters>
-    </check>
-
     <!-- Some version control systems don’t cope well with files which don’t end with a newline character. -->
     <check level="error" class="org.scalastyle.file.NewLineAtEofChecker" enabled="true"/>
 
@@ -91,13 +83,6 @@ This file is divided into 3 sections:
     <check level="error" class="org.scalastyle.scalariform.EnsureSingleSpaceAfterTokenChecker" enabled="true">
         <parameters>
             <parameter name="tokens">ARROW, EQUALS, COMMA, COLON, IF, ELSE, DO, WHILE, FOR, MATCH, TRY, CATCH, FINALLY, LARROW, RARROW</parameter>
-        </parameters>
-    </check>
-
-    <!-- A consistent naming convention for field names can make code easier to read and understand. -->
-    <check level="error" class="org.scalastyle.scalariform.FieldNamesChecker" enabled="true">
-        <parameters>
-            <parameter name="regex">^[a-z][A-Za-z0-9]*$</parameter>
         </parameters>
     </check>
 
@@ -157,7 +142,7 @@ This file is divided into 3 sections:
     <!-- A procedure style declaration can cause confusion -
         the developer may have simply forgotten to add a ’=’,
         and now their method returns Unit rather than the inferred type. -->
-    <check level="error" class="org.scalastyle.scalariform.PatternMatchAlignChecker" enabled="true"/>
+    <check level="error"  class="org.scalastyle.scalariform.ProcedureDeclarationChecker" enabled="true"/>
 
     <!-- A public method declared on a type is effectively an API declaration.
          Explicitly declaring a return type means that other code which depends on that type
@@ -227,6 +212,16 @@ This file is divided into 3 sections:
     <!--                               rules we don't want                                -->
     <!-- ================================================================================ -->
 
+    <!-- Code that is not indented consistently can be hard to read.
+         Scalariform takes care of this.
+    -->
+    <check level="error" class="org.scalastyle.file.IndentationChecker" enabled="false">
+        <parameters>
+            <parameter name="tabSize">2</parameter>
+            <parameter name="methodParamIndentSize">2</parameter>
+        </parameters>
+    </check>
+
     <!-- We want the opposite of this: NewLineAtEofChecker -->
     <check level="error" class="org.scalastyle.file.NoNewLineAtEofChecker" enabled="false"/>
 
@@ -239,10 +234,19 @@ This file is divided into 3 sections:
     </check>
 
     <!-- Not a big concern. The braces aren't major. -->
-    <check level="error" class="org.scalastyle.scalariform.EmptyClassChecker" enabled="true"/>
+    <check level="error" class="org.scalastyle.scalariform.EmptyClassChecker" enabled="false"/>
+
+    <!-- A consistent naming convention for field names can make code easier to read and understand.
+         Breaks on `val (field1, field2) = ` syntax
+    -->
+    <check level="error" class="org.scalastyle.scalariform.FieldNamesChecker" enabled="false">
+        <parameters>
+            <parameter name="regex">^[a-z][A-Za-z0-9]*$</parameter>
+        </parameters>
+    </check>
 
     <!-- Not a big concern. -->
-    <check level="error" class="org.scalastyle.scalariform.ForBraceChecker" enabled="true"/>
+    <check level="error" class="org.scalastyle.scalariform.ForBraceChecker" enabled="false"/>
 
 
     <!-- If statement blocks with only a single line should not have braces according to the standard scala style -->

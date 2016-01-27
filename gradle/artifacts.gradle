@@ -17,7 +17,7 @@ task sourcesJar(type: Jar, dependsOn: classes) {
     extension "jar"
 }
 
-task testSourcesJar(type:Jar) {
+task testSourcesJar(type:Jar, dependsOn: testJar) {
     from sourceSets.test.allSource
     classifier "test-sources"
     extension "jar"

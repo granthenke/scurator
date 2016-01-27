@@ -1,6 +1,6 @@
 apply from: "$rootDir/gradle/scalariform.gradle"
 apply plugin: 'scalaStyle'
-apply plugin: 'scoverage'
+apply plugin: 'org.scoverage'
 apply plugin: 'com.github.ben-manes.versions'
 
 scalaStyle {
@@ -23,4 +23,16 @@ checkScoverage.shouldRunAfter('test')
 
 dependencyUpdates {
     revision="release"
+    resolutionStrategy = {
+        componentSelection { rules ->
+            rules.all { ComponentSelection selection ->
+                boolean rejected = ['snap', 'alpha', 'beta', 'rc', 'cr', 'm'].any { qualifier ->
+                    selection.candidate.version ==~ /(?i).*[.-]${qualifier}[.\d-]*/
+                }
+                if (rejected) {
+                    selection.reject('Release candidate')
+                }
+            }
+        }
+    }
 }

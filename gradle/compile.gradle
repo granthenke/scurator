@@ -1,5 +1,4 @@
 // Set compilation settings for the project
-// Note: Some options are commented out by default, but can be uncommented in useful situations
 allprojects {
   // Scala configuration
   tasks.withType(ScalaCompile) {
